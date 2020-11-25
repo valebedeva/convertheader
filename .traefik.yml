@@ -1,0 +1,17 @@
+displayName: Convert Header
+summary: Replace some part of header by another value. Convert header to hex or int64 from uint64. Add prefix and postfix to header.
+type: middleware
+import: github.com/valebedeva/convertheader
+compatibility: TODO
+testData:
+  fromHeader: "X-Test-Header"
+  createHeader: "X-New-Header"
+  replaceValues:
+    - oldValue: "SerialNumber%3D"
+      newValue: ""
+    - oldValue: "%22"
+      newValue: ""
+  convertType: "uint64toint64"
+  prefix: "SN="
+  postfix: ";"
+
