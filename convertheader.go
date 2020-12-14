@@ -62,6 +62,10 @@ func New(ctx context.Context, next http.Handler, config *Config, name string) (h
 // return nothing if regexp failed.
 func (u *ConvertHeader) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	header := req.Header.Get(u.config.FromHeader)
+	newHeader := req.Header.Get(u.config.CreateHeader)
+	if newHeader != "" {
+		req.Header.Del(u.config.CreateHeader)
+	}
 	if u.config.ReplaceValues != nil {
 		for _, replaceValue := range u.config.ReplaceValues {
 			header = strings.ReplaceAll(header, replaceValue.OldValue, replaceValue.NewValue)

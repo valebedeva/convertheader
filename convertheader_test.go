@@ -94,6 +94,17 @@ func TestConvertHeader_ServeHTTP(t *testing.T) {
 				ConvertType:   "uint64toint64",
 			},
 		},
+		{
+			desc:				"Cut and convert to hex",
+			header:				"SomeValue",
+			expectedValue:    	"SomeValue/new",
+			expectedCode:		http.StatusOK,
+			config: 			ch.Config{
+				FromHeader:    "TEST-HEADER",
+				CreateHeader:  "EXISTING-HEADER",
+				Postfix:       "/new",
+			},
+		},
 	}
 	for _, test := range testCases {
 		test := test
@@ -102,6 +113,7 @@ func TestConvertHeader_ServeHTTP(t *testing.T) {
 			fat, _ := ch.New(context.Background(), next, &test.config, "TestConvertHeader")
 			r := httptest.NewRequest("GET", "http://example.com", nil)
 			r.Header.Set(test.config.FromHeader, test.header)
+			r.Header.Set("EXISTING-HEADER", "OldValue")
 			w := httptest.NewRecorder()
 			fat.ServeHTTP(w, r)
 			if test.expectedCode != w.Code {
