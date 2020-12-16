@@ -2,16 +2,16 @@
 
 Replace some part of header by another value. Convert header to hex or int64 from uint64. Add prefix and postfix to header.
 
-- 'fromHeader' - the header from which to take the value
-- 'createHeader' - new header, remove the old value if it exists
-- 'replaceValues' - replace oldValue by newValue, array (First order)
-- 'convertType' - for convert value from uint64 to hex use "uint64tohex", for convert from uint64toint65 use uint64toint64, only these values are available (Second order)
-- 'prefix' - add prefix to value (Third order)
-- 'postfix' - add postfix to value (Fourth order)
+- 'fromHeader' - the header from which to take the value, required
+- 'createHeader' - new header; remove the old value if it exists, required
+- 'replaceValues' - replace oldValue by newValue, array, optional (First order)
+- 'convertType' - for convert value from uint64 to hex use "uint64tohex", for convert from uint64toint65 use uint64toint64, only these values are available, optional (Second order)
+- 'prefix' - add prefix to value, optional (Third order)
+- 'postfix' - add postfix to value, optional (Fourth order)
   
 Some operations can be skipped.
 
-####Yaml example:
+#### Yaml example:
 ```yaml
 middlewares:
   convertHeader:
@@ -29,7 +29,7 @@ middlewares:
           postfix: ";"
 ```
 
-####Labels example:
+#### Labels example:
 ```
 - traefik.http.middlewares.convertHeader.plugin.convertheader.fromHeader=X-OLD
 - traefik.http.middlewares.convertHeader.plugin.convertheader.createHeader=X-NEW
@@ -42,6 +42,6 @@ middlewares:
 - traefik.http.middlewares.convertHeader.plugin.convertheader.postfix=;
 ```
 
-Input: X-OLD="SerialNumber=9876543345678%"
+Input: 'X-OLD: SerialNumber=9876543345678%'
 
-Output: X-NEW="SN=8fb8fdb940e;"
+Output: 'X-NEW: SN=8fb8fdb940e;'
