@@ -1,11 +1,11 @@
 # Plugin for traefik: Convert Header
 
-Replace some part of header by another value. Convert header to hex or int64 from uint64. Add prefix and postfix to header.
+Creates a new header based on the existing one.Replace some part of header by another value. Convert header to hex or int64 from uint64. Add prefix and postfix to header.
 
 - 'fromHeader' - the header from which to take the value, required
 - 'createHeader' - new header; remove the old value if it exists, required
 - 'replaceValues' - replace oldValue by newValue, array, optional (First order)
-- 'convertType' - for convert value from uint64 to hex use "uint64tohex", for convert from uint64toint65 use uint64toint64, only these values are available, optional (Second order)
+- 'convertType' - for convert value from uint64 to hex use "uint64tohex", for convert from uint64toint64 use uint64toint64, only these values are available, optional (Second order)
 - 'prefix' - add prefix to value, optional (Third order)
 - 'postfix' - add postfix to value, optional (Fourth order)
   
